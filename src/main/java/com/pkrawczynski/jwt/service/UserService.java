@@ -34,10 +34,10 @@ public class UserService {
     }
 
     public String signin(String username, String password) {
+
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-            User user = userRepository.findByUsername(username);
-            System.out.println(username);
+            User user = checkUser(username);
             return jwtTokenProvider.createToken(username, createRolesList(user.getRole()));
         } catch (AuthenticationException e) {
             throw new JwtValidateException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);

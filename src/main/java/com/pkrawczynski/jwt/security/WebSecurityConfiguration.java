@@ -20,6 +20,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     AppUserDetails userDetails;
 
+    @Autowired
+    JwtTokenFilterConfigurer jwtTokenFilterConfigurer;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -34,13 +37,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/signin").permitAll()//
                 .antMatchers("/users/signup").permitAll()//
                 .antMatchers("/h2-console/**/**").permitAll()
+                .antMatchers("/app/user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/app/admin").hasAnyAuthority("ADMIN")
                 // Disallow everything else..
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .apply(jwtTokenFilterConfigurer);
 
         // If a user try to access a resource without having enough permissions
         http.exceptionHandling().accessDeniedPage("/users/signin");
 
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

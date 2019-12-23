@@ -22,11 +22,17 @@ public class OnStartApp implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         userRepository.save(new User("Johny", "Bravo", "jbravo", encoder.encode("password"), Role.ADMIN));
-        User user = userRepository.findByUsername("jbravo");
+        userRepository.save(new User("Mr", "Smith","msmith",encoder.encode("password"), Role.USER));
+        User admin = userRepository.findByUsername("jbravo");
+        User user = userRepository.findByUsername("msmith");
 
-        String login = user.getUsername();
-        String password = user.getPass();
+        String loginUser = user.getUsername();
+        String passwordUser = user.getPass();
 
-        System.out.println("Login: " + login + " | Pass: " + password);
+        String loginAdmin = admin.getUsername();
+        String passwordAdmin = admin.getPass();
+
+        System.out.println("Login: " + loginAdmin + " | Pass: " + passwordAdmin);
+        System.out.println("Login: " + loginUser + " | Pass: " + passwordUser);
     }
 }

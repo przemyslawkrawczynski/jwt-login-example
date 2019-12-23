@@ -1,11 +1,9 @@
 package com.pkrawczynski.jwt.controller;
 
+import com.pkrawczynski.jwt.domain.UserAuthenticationDto;
 import com.pkrawczynski.jwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -19,7 +17,7 @@ public class JwtUserController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        return userService.signin(username, password);
+    public String login(@RequestBody UserAuthenticationDto userAuthenticationDto) {
+        return userService.signin(userAuthenticationDto.getUsername(), userAuthenticationDto.getPassword());
     }
 }

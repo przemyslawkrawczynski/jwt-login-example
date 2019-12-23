@@ -61,11 +61,8 @@ public class User {
             case "ADMIN":
                 result = Role.ADMIN;
                 break;
-            case "CONSULTANT":
-                result = Role.CONSULTANT;
-                break;
             default:
-                result = Role.CONSULTANT;
+                result = Role.USER;
         }
         return result;
     }

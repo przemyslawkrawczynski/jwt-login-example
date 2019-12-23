@@ -72,6 +72,7 @@ public class JwtTokenProvider {
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(getSecretKeyEncoded()).parseClaimsJws(token);
+            System.out.println("Poprawnie zwalidowałem");
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             System.out.println(e);
