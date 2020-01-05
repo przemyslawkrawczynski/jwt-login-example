@@ -1,5 +1,6 @@
 package com.pkrawczynski.jwt.service;
 
+import com.pkrawczynski.jwt.domain.JwtTokenDto;
 import com.pkrawczynski.jwt.domain.Role;
 import com.pkrawczynski.jwt.domain.User;
 import com.pkrawczynski.jwt.exception.JwtValidateException;
@@ -33,12 +34,12 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public String signin(String username, String password) {
+    public JwtTokenDto signin(String username, String password) {
 
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             User user = checkUser(username);
-            return jwtTokenProvider.createToken(username, createRolesList(user.getRole()));
+            return new JwtTokenDto(jwtTokenProvider.createToken(username, createRolesList(user.getRole())));
         } catch (AuthenticationException e) {
             throw new JwtValidateException("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
         }

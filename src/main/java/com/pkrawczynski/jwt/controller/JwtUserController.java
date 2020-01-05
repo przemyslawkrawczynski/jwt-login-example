@@ -1,12 +1,16 @@
 package com.pkrawczynski.jwt.controller;
 
+import com.pkrawczynski.jwt.domain.JwtTokenDto;
 import com.pkrawczynski.jwt.domain.UserAuthenticationDto;
 import com.pkrawczynski.jwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("*")
 public class JwtUserController {
 
     private final UserService userService;
@@ -17,7 +21,7 @@ public class JwtUserController {
     }
 
     @PostMapping("/signin")
-    public String login(@RequestBody UserAuthenticationDto userAuthenticationDto) {
+    public JwtTokenDto login(@RequestBody UserAuthenticationDto userAuthenticationDto, HttpServletRequest request) {
         return userService.signin(userAuthenticationDto.getUsername(), userAuthenticationDto.getPassword());
     }
 }
