@@ -37,7 +37,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/signin").permitAll()//
                 .antMatchers("/users/signup").permitAll()//
                 .antMatchers("/h2-console/**/**").permitAll()
-                .antMatchers("/app/user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/app/user").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/app/admin").hasAnyAuthority("ADMIN")
                 // Disallow everything else..
                 .anyRequest().authenticated()

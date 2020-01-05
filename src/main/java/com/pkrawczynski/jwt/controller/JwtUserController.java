@@ -21,7 +21,7 @@ public class JwtUserController {
     }
 
     @PostMapping("/signin")
-    public JwtTokenDto login(@RequestBody UserAuthenticationDto userAuthenticationDto, HttpServletRequest request) {
+    public JwtTokenDto login(@RequestBody UserAuthenticationDto userAuthenticationDto) {
         return userService.signin(userAuthenticationDto.getUsername(), userAuthenticationDto.getPassword());
     }
 }

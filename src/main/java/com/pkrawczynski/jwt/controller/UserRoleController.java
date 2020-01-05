@@ -1,16 +1,20 @@
 package com.pkrawczynski.jwt.controller;
 
+import com.pkrawczynski.jwt.domain.UserAuthenticationDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/app/user")
+@CrossOrigin("*")
 public class UserRoleController {
 
     @GetMapping
-    public ResponseEntity<String> getAdminPage() {
-        return ResponseEntity.ok().body("Pomyślnie otworzono stronę usera");
+    public ResponseEntity<UserAuthenticationDto> getAdminPage() {
+        UserAuthenticationDto userAuthenticationDto = new UserAuthenticationDto("Jan", "Kowalski");
+        return ResponseEntity.ok().body(userAuthenticationDto);
     }
 }
