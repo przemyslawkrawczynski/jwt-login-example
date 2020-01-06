@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/app/admin")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class AdminRoleController {
 
     @GetMapping

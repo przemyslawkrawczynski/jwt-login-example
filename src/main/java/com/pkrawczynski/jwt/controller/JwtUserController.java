@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class JwtUserController {
 
     private final UserService userService;

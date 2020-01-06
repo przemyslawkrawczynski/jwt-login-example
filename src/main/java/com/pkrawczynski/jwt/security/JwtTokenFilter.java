@@ -29,7 +29,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             if (token != null && jwtTokenProvider.validateToken(token)) {
                 Authentication auth = jwtTokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(auth);
-                response.addHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Origin", "*");
+                response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+                response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
             }
         } catch (JwtValidateException ex) {
             //this is very important, since it guarantees the user is not authenticated at all
